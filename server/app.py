@@ -3,9 +3,11 @@ from flask import Flask
 app = Flask(__name__)
 
 
-@app.route("/")
-def index():
-    return "<h1>Python Operations with Flask Routing and Views</h1>"
+def test_index(client):
+    response = client.get("/")
+    assert b"Python Operations with Flask Routing and Views" in response.data.decode(
+        "utf-8"
+    )
 
 
 @app.route("/print/<string:parameter>")
